@@ -17,6 +17,11 @@ func main() {
 	// Return multiple values (EVEN)
 	terms2, sum2, evenOdd2 := addMulti(1, 3, 5, 7, 9, 10)
 	fmt.Println("Added ", terms2, "terms(", evenOdd2, ") to get total: ", sum2)
+
+	// Using named variables
+	terms3, sum3, evenOdd3 := addNamed(1, 3, 5, 6)
+	fmt.Print("Using named -> ")
+	fmt.Println("Added ", terms3, "terms(", evenOdd3, ") to get total: ", sum3)
 }
 
 func add(x ...int) int {
@@ -37,4 +42,16 @@ func addMulti(x ...int) (int, int, string) {
 		evenOdd = "EVEN"
 	}
 	return len(x), result, evenOdd
+}
+
+func addNamed(x ...int) (terms3 int, sum3 int, evenOdd3 string) {
+	terms3 = len(x)
+	for _, term := range x {
+		sum3 += term
+	}
+	evenOdd3 = "ODD"
+	if terms3%2 == 0 {
+		evenOdd3 = "EVEN"
+	}
+	return
 }
