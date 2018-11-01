@@ -18,21 +18,29 @@ func main() {
 
 	switch {
 	case option == "1":
-		for index, value := range plantCapacities {
-			fmt.Printf("Plant %d capacity: %.0f\n", index, value)
-		}
+		plantCap(plantCapacities...)
 
 	case option == "2":
-		capacity := 0.
-		for _, plantId := range activePlants {
-			capacity += plantCapacities[plantId]
-		}
-
-		fmt.Printf("%-20s%.0f\n", "Capacity: ", capacity)
-		fmt.Printf("%-20s%.0f\n", "GridLoad: ", gridLoad)
-		fmt.Printf("%-20s%.1f%%\n", "Utilization: ", gridLoad/capacity*100)
+		plantDetails(activePlants, plantCapacities, gridLoad)
 
 	default:
 		fmt.Println("Unknown option")
 	}
+}
+
+func plantCap(plantCapacities ...float64) {
+	for index, value := range plantCapacities {
+		fmt.Printf("Plant %d capacity: %.0f\n", index, value)
+	}
+}
+
+func plantDetails(activePlants []int, plantCapacities []float64, gridLoad float64) {
+	capacity := 0.
+	for _, plantID := range activePlants {
+		capacity += plantCapacities[plantID]
+	}
+
+	fmt.Printf("%-20s%.0f\n", "Capacity: ", capacity)
+	fmt.Printf("%-20s%.0f\n", "GridLoad: ", gridLoad)
+	fmt.Printf("%-20s%.1f%%\n", "Utilization: ", gridLoad/capacity*100)
 }
